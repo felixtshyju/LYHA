@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LYHA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #F5F1EB;
+  --bg-soft: #FFF8F2;
+  --gold: #C8A96A;
+  --gold-light: #E6D3A3;
+  --text: #3A2E2A;
+  --text-soft: #7A6F66;
+}
+
+body.dark {
+  --bg: #121212;
+  --bg-soft: #1E1E1E;
+  --text: #F5F1EB;
+  --text-soft: #C8C8C8;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  transition: 0.4s;
+}
+
+/* 🌌 STRONGER VISIBLE BACKGROUND */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(200,169,106,0.35), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(200,169,106,0.25), transparent 40%);
+  animation: move 10s infinite alternate ease-in-out;
+}
+
+@keyframes move {
+  0% { background-position: 20% 30%, 80% 70%; }
+  100% { background-position: 35% 45%, 65% 55%; }
+}
+
+/* 🧭 NAV */
+nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  padding: 10px 25px;
+  border-radius: 50px;
+  z-index: 1000;
+}
+
+body.dark nav { background: rgba(30,30,30,0.7); }
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  position: relative;
+}
+
+nav li {
+  cursor: pointer;
+  padding: 8px 12px;
+  z-index: 2;
+}
+
+.highlight {
+  position: absolute;
+  height: 35px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+/* 🌙 toggle */
+.toggle {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+/* 📌 sections */
+section {
+  min-height: auto;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🏠 HERO */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  margin-top: 20px;
+  letter-spacing: 3px;
+}
+
+.hero p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: var(--text-soft);
+}
+
+/* 📖 BIO */
+.bio-card {
+  max-width: 650px;
+  background: var(--bg-soft);
+  padding: 25px;
+  border-radius: 20px;
+  margin-top: 20px;
+  line-height: 1.8;
+}
+
+/* ℹ️ ABOUT */
+.about-text {
+  max-width: 600px;
+  text-align: center;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+/* ✨ WORK */
+.works-card img {
+  width: 300px;
+  border-radius: 20px;
+}
+
+/* ✨ about */
+.about-card img {
+  width: 300px;
+  border-radius: 20px;
+}
+
+/* 📞 CONTACT GRID */
+.contact-grid {
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  align-items: center;      /* center all cards */
+  gap: 18px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.contact-card {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 20px;
+  background: var(--bg-soft);
+  justify-content: flex-start; /* clean alignment */
+}
+
+.contact-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.contact-card img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.footer-copy {
+  text-align: center;
+  padding: 100px 10px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+/* 📱 */
+@media(max-width:600px){
+  .hero h1 { font-size: 44px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="toggle" onclick="toggleDark()">🌙</div>
+
+<nav>
+  <ul id="navList">
+    <div class="highlight" id="highlight"></div>
+    <li data-target="home">Home</li>
+    <li data-target="about">About</li>
+    <li data-target="works">Works</li>
+    <li data-target="contact">Contact</li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="hero">
+  <img src="lyha.jpg">
+  <h1>LYHA</h1>
+  <p>by Angela</p>
+
+  <div class="bio-card">
+    <b>L</b> – Limitless: <br>Celebrating beauty without boundaries or rigid standards.<br>
+    <b>Y</b> – Yourself: <br>Emphasizing that the most beautiful version of you is the authentic you.<br>
+    <b>H</b> – Highlight: <br>Drawing attention to the unique beauty already present.<br>
+    <b>A</b> – Accentuate: <br>The art of refining features rather than masking them.
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About</h2>
+  <p class="about-text">
+    LYHA is a makeup studio by Angela Leela John.  
+    Certified under (EICBI) Europe India Centre for Business and Industry.  
+    Focused on enhancing natural beauty with elegance and precision. <br><br><br>
+  </p>
+    <div class="about-card">
+      <img src="Angela.jpg">
+    </div>
+</section>
+
+<!-- WORK -->
+<section id="works">
+  <h2>Our Work</h2>
+  <div class="works-card">
+    <img src="works1.jpg">
+     <img src="works2.jpg">
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="fade">Contact</h2>
+
+  <div class="contact-grid">
+
+    <div class="contact-card fade">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+      <span>__angellahh__</span>
+    </div>
+
+    <div class="contact-card fade">
+      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+      <span>angelaleelajohn@gmail.com</span>
+    </div>
+
+    <div class="contact-card fade">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+      <span>WhatsApp: +91 00000 00000</span>
+    </div>
+
+    <div class="contact-card fade">
+      <img src="https://cdn-icons-png.flaticon.com/512/597/597177.png">
+      <span>Phone: +91 00000 00000</span>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer-copy">
+  © 2026 LYHA. All rights reserved.
+</footer>
+
+<script>
+const navItems = document.querySelectorAll("nav li");
+const highlight = document.getElementById("highlight");
+
+function moveHighlight(el){
+  highlight.style.width = el.offsetWidth + "px";
+  highlight.style.left = el.offsetLeft + "px";
+}
+
+// click
+navItems.forEach(item => {
+  item.addEventListener("click", () => {
+    document.getElementById(item.dataset.target).scrollIntoView({behavior:"smooth"});
+  });
+});
+
+// SCROLL BASED ACTIVE (FIXED)
+window.addEventListener("scroll", () => {
+  let current = "";
+
+  document.querySelectorAll("section").forEach(section => {
+    const top = window.scrollY;
+    const offset = section.offsetTop - 200;
+    const height = section.offsetHeight;
+
+    if(top >= offset && top < offset + height){
+      current = section.id;
+    }
+  });
+
+  navItems.forEach(li => {
+    if(li.dataset.target === current){
+      moveHighlight(li);
+    }
+  });
+});
+
+// initial
+window.onload = () => moveHighlight(navItems[0]);
+window.onresize = () => moveHighlight(document.querySelector("nav li"));
+  
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
